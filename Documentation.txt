@@ -7,7 +7,7 @@ images.
 
 The images were previously marked as training, validation, and test. We initially
 processed them by moving them into folders based on their classification, 
-flattenning them, and then performed standardization using the mean from the 
+flattening them, and then performed standardization using the mean from the 
 training set. However, as accessing each image proved to be too large a computation 
 load for our system, we switched to processing them via a series of generators: one 
 for the train data, one for the valid data, and one for the test data. This enabled
