@@ -28,4 +28,22 @@ To update our model, we updated it to use a pretrained model with transfer learn
 from resnet50. We still used adam as our optimizer and binary cross entropy. We
 ran one epoch of this training as well, due to the same computational load issues.
 
+We have thus far been unable to run classification_report on this due to
+computational load.
+
+In addition to evaluation via classification_report, we introduced both quantitative
+and visual checks. We created confusion matrices for each of the attributes. We 
+found that with the low accuracy, our model was largely teaching itself to predict
+all 0s. We had very few false positives, and for many attributes none. Beyond
+further training, it would be helpful to us to tweak the thresholds our model
+recognizes as positive and negative.
+
+We also introduced the ability to predict with custom photos. This enabled us to
+take images we both know and can see the label to, and see how our model fared in
+comparison. Two sample images are available in the repository, Lila.png and Sam.jpg.
+
+Ultimately, our model suffered greatly from a lack of resources. Training on more
+than one epoch would be critical to improving our accuracy, especially given the
+complexity of our data and the large number of outputs we were working with.
+
 
