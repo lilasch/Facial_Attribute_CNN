@@ -16,5 +16,11 @@ us to rescale and access all of our data without loading in each individual imag
 Our initial model was a sequential model with two Conv2D laters, a Flatten layer,
 a Dropout Layer, and 2 Dense Layers. It used adam as its optimizer and binary
 crossentropy for the loss, as since the categories are neither exclusive nor related,
-what we require of our model is 40 separate binary classifications.
+what we require of our model is 40 separate binary classifications. We programmed
+in early stopping; however, due to the tremendous computational load, for the sake
+of evaluation we ultimately stopped it after one epoch to ensure we had some results.
+This produced a test accuracy of 0.0149.
+
+Using sklearn's classification_report, we found this initial model to have a 
+weighted average precision of 0.41, recall of 0.32, and f-1 score of 0.34.
 
