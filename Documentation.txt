@@ -1,1 +1,5 @@
+Facial Attribute Classification by Lila Schisgal and Phoebe Jeske
 
+With this project, we sought to create a convolutional neural network capable of recognizing forty different facial attributes. We did this by using the Large-Scale CelebFaces Attributes Dataset, a collection of more than 200.000 labelled images.
+
+The images were previously marked as training, validation, and test. We initially processed them by moving them into folders based on their classification, flattenning them, and then performed standardization using the mean from the training set. However, as accessing each image proved to be too large a computation load for our system, we switched to processing them via a series of generators: one for the train data, one for the valid data, and one for the test data.
