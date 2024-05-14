@@ -24,3 +24,8 @@ This produced a test accuracy of 0.0149.
 Using sklearn's classification_report, we found this initial model to have a 
 weighted average precision of 0.41, recall of 0.32, and f-1 score of 0.34.
 
+To update our model, we updated it to use a pretrained model with transfer learning
+from resnet50. We still used adam as our optimizer and binary cross entropy. We
+ran one epoch of this training as well, due to the same computational load issues.
+
+
