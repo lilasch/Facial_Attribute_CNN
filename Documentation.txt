@@ -28,26 +28,28 @@ With this in mind, we then updated our model to use transfer learning with ResNe
 for image recognition tasks built in 2015. We froze each layer in ResNet50 and still used adam as our optimizer and binary cross entropy for 
 our loss function. We decreased our dataset down to only 1000 training images in order to get the model to run
 faster, since it takes a lot of time to train all 40 outputs at once. This sped up the training process significantly, allowing
-us to train a larger model for more epochs. 
+us to train a larger model for more epochs. We ran the model for 5 epochs.
 
 We then implemented fine-tuning of this network by unfreezing about half of the model's layers (the last 25 layers) and
-further training with a learning rate of 0.0001. This further improved accuracy, and training accuracy jumped to about 15%,
-but validation accuracy stayed around 2-3%, indicating overfitting. We added a BatchNormalization and Dropout layer (with 30% dropout)
-to remedy some of this overfitting. We ran the fine-tuning of the model for another 10 epochs. 
+further training with a learning rate of 0.0001. This further improved accuracy, and training accuracy jumped to between 5-8%,
+but validation accuracy stayed around 2%, indicating overfitting. We added a BatchNormalization and Dropout layer (with 30% dropout)
+to remedy some of this overfitting. We ran the fine-tuning of the model for another 5 epochs. Our classification report showed that
+this model had average precision, recall, and f-1 scores of 0.63, 0.30, and 0.39, respectively.
 
-We have thus far been unable to run classification_report on this due to
-computational load.
-
-In addition to evaluation via classification_report, we introduced both quantitative
-and visual checks. We created confusion matrices for each of the attributes. We 
-found that our model was largely overfitting by mostly predicting all 0s or all 1s, depending
-on the attribute. Another issue was that the threshold for each attribute was different--for example, the threshold for "Male" seemed to hover around 53%, whereas "Gray Hair" centered around 38%, with 37% being no and ~38.7% being yes. This made it difficult to evaluate the model accurately, because it made accurate predictions, but each threshold was different. Beyond further training, it would be helpful to us to tweak the thresholds our model recognizes as positive and negative for each attribute. This would require going through each of the 40 attributes and determining the best threshold for each depending on testing output (for example, finding the range of values predicted for each attribute and setting the threshold to the median of that range).
+In addition to evaluation via classification_report, we introduced both quantitative and visual checks. We created confusion matrices for 
+each of the attributes. We found that our model was largely overfitting by mostly predicting all 0s or all 1s, depending
+on the attribute. Another issue was that the threshold for each attribute was different--for example, the threshold for "Male" seemed to
+hover around 53%, whereas "Gray Hair" centered around 38%, with 37% being no and ~38.7% being yes. This made it difficult to evaluate the 
+model accurately, because it made accurate predictions, but each threshold was different. Beyond further training, it would be helpful to 
+us to tweak the thresholds our model recognizes as positive and negative for each attribute. This would require going through each of the 
+40 attributes and determining the best threshold for each depending on testing output (for example, finding the range of values predicted 
+for each attribute and setting the threshold to the median of that range).
 
 We included a testing function to evaluate the model's performance on a single image. This function shows the image with 
 PyPlot and prints the model's output for each of the 40 facial attributes. An example is included in our code. 
 
 We also introduced the ability to predict with custom photos. This enabled us to
-take images we both know and can see the label towe both know and can see the label to, and see how our model fared in
+take images we both know and can see the labels for, and see how our model fared in
 comparison. Two sample images are available in the repository, Lila.png and Sam.jpg. The model did quite well in predicting
 various facial attributes from these image uploads. 
 
