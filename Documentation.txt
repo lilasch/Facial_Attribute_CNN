@@ -1,12 +1,28 @@
 Facial Attribute Classification by Lila Schisgal and Phoebe Jeske
 
-With this project, we sought to create a convolutional neural network capable of recognizing forty different facial attributes. We did this by using the Large-Scale CelebFaces Attributes Dataset, a collection of more than 200.000 labelled images.
+With this project, we sought to create a convolutional neural network capable 
+of recognizing forty different facial attributes. We did this by using the Large-
+Scale CelebFaces Attributes Dataset, a collection of more than 200.000 labelled
+images.
 
-The images were previously marked as training, validation, and test. We initially processed them by moving them into folders based on their classification, flattening them, and then performed standardization using the mean from the  training set. However, as accessing each image proved to be too large a computational  load for our system, we switched to processing them via a series of generators: one for the training data, one for the validation data, and one for the testing data. This enabled us to rescale and access all of our data without loading each individual image separately.
+The images were previously marked as training, validation, and test. We initially
+processed them by moving them into folders based on their classification, 
+flattening them, and then performed standardization using the mean from the 
+training set. However, as accessing each image proved to be too large a computational 
+load for our system, we switched to processing them via a series of generators: one 
+for the training data, one for the validation data, and one for the testing data. This enabled
+us to rescale and access all of our data without loading each individual image separately.
 
-Our initial model was a sequential model with two Conv2D laters, a Flatten layer, a Dropout Layer, and 2 Dense Layers. It used Adam as its optimizer and binary cross-entropy for the loss, as since the categories are neither exclusive nor related, we required 40 separate binary classifications for each attribute. We programmed in early stopping after five epochs; however, due to the tremendous computational load, we ran the model for just one epoch with our full training dataset (160.000 images).
+Our initial model was a sequential model with two Conv2D laters, a Flatten layer,
+a Dropout Layer, and 2 Dense Layers. It used Adam as its optimizer and binary
+cross-entropy for the loss, as since the categories are neither exclusive nor related,
+we required 40 separate binary classifications for each attribute. We programmed
+in early stopping after five epochs; however, due to the tremendous computational load, we ran the model
+for just one epoch with our full training dataset (160.000 images).
 
-Using sklearn's classification_report, we found this initial model to have a weighted average precision of 0.41, recall of 0.32, and f-1 score of 0.34. Due to the small size of the model and the fact that we didn't train it for long, accuracy was quite low. 
+Using sklearn's classification_report, we found this initial model to have a 
+weighted average precision of 0.41, recall of 0.32, and f-1 score of 0.34. Due to the small size of the model
+and the fact that we didn't train it for long, accuracy was quite low. 
 
 With this in mind, we then updated our model to use transfer learning with ResNet50, a 50-layer convolutional neural network
 for image recognition tasks built in 2015. We froze each layer in ResNet50 and still used adam as our optimizer and binary cross entropy for 
@@ -19,16 +35,26 @@ further training with a learning rate of 0.0001. This further improved accuracy,
 but validation accuracy stayed around 2-3%, indicating overfitting. We added a BatchNormalization and Dropout layer (with 30% dropout)
 to remedy some of this overfitting. We ran the fine-tuning of the model for another 10 epochs. 
 
-We have thus far been unable to run classification_report on this due to computational load.
+We have thus far been unable to run classification_report on this due to
+computational load.
 
 In addition to evaluation via classification_report, we introduced both quantitative
-and visual checks. We created confusion matrices for each of the attributes. We found that our model was largely overfitting by mostly predicting all 0s or all 1s, depending on the attribute. Another issue was that the threshold for each attribute was different--for example, the percentage of faces for which the model predicted "Male" was quite high compared to the percentage of faces the model predicted as
-having arched eyebrows. Beyond further training, it would be helpful to us to tweak the thresholds our model recognizes as positive and negative for each attribute. This would require going through each of the 40 attributes and determining the best threshold for each depending on testing output.
+and visual checks. We created confusion matrices for each of the attributes. We 
+found that our model was largely overfitting by mostly predicting all 0s or all 1s, depending
+on the attribute. Another issue was that the threshold for each attribute was different--for example, the threshold for "Male" seemed to hover around
+53%, whereas "Gray Hair" centered around 38%, with 37% being no and ~38.7% being yes. This made it difficult to evaluate the model accurately, because
+it made accurate predictions, but each threshold was different. Beyond further training, it would be helpful to us to tweak the thresholds our model
+recognizes as positive and negative for each attribute. This would require going through each of the 40 attributes
+and determining the best threshold for each depending on testing output (for example, finding the range of values predicted for each attribute and
+setting the threshold to the median of that range).
 
 We included a testing function to evaluate the model's performance on a single image. This function shows the image with 
 PyPlot and prints the model's output for each of the 40 facial attributes. An example is included in our code. 
 
-We also introduced the ability to predict with custom photos. This enabled us to take images we both know and can see the label towe both know and can see the label to, and see how our model fared in comparison. Two sample images are available in the repository, Lila.png and Sam.jpg. The model did quite well in predicting various facial attributes from these image uploads. 
+We also introduced the ability to predict with custom photos. This enabled us to
+take images we both know and can see the label towe both know and can see the label to, and see how our model fared in
+comparison. Two sample images are available in the repository, Lila.png and Sam.jpg. The model did quite well in predicting
+various facial attributes from these image uploads. 
 
 Ultimately, longer training for more epochs is necessary in order for the model to improve its f1 score and predictions of
 testing data. Training for more than one epoch with the full dataset of 160.000 training images would be critical to 
@@ -36,4 +62,5 @@ improving the model's accuracy, especially given the complexity of our data and 
 With more time for this project, we would introduce data augmentation to improve the model's accuracy and further analyze the 
 thresholds for each of the separate attributes in order to compute more helpful confusion matrices. Still, we are proud of our work
 in predicting facial attributes with reasonable accuracy with a CNN utilizing transfer learning. We've learned how to process image
-data by standardizing, resizing, and creating dataframes, and we've learned how to write a sophisticated model for multi-label classification as well as how to evaluate this model with precision, recall, and f1 statistics and confusion matrices for each attribute. 
+data by standardizing, resizing, and creating dataframes, and we've learned how to write a sophisticated model for multi-label classification as
+well as how to evaluate this model with precision, recall, and f1 statistics and confusion matrices for each attribute. 
