@@ -41,12 +41,7 @@ computational load.
 In addition to evaluation via classification_report, we introduced both quantitative
 and visual checks. We created confusion matrices for each of the attributes. We 
 found that our model was largely overfitting by mostly predicting all 0s or all 1s, depending
-on the attribute. Another issue was that the threshold for each attribute was different--for example, the threshold for "Male" seemed to hover around
-53%, whereas "Gray Hair" centered around 38%, with 37% being no and ~38.7% being yes. This made it difficult to evaluate the model accurately, because
-it made accurate predictions, but each threshold was different. Beyond further training, it would be helpful to us to tweak the thresholds our model
-recognizes as positive and negative for each attribute. This would require going through each of the 40 attributes
-and determining the best threshold for each depending on testing output (for example, finding the range of values predicted for each attribute and
-setting the threshold to the median of that range).
+on the attribute. Another issue was that the threshold for each attribute was different--for example, the threshold for "Male" seemed to hover around 53%, whereas "Gray Hair" centered around 38%, with 37% being no and ~38.7% being yes. This made it difficult to evaluate the model accurately, because it made accurate predictions, but each threshold was different. Beyond further training, it would be helpful to us to tweak the thresholds our model recognizes as positive and negative for each attribute. This would require going through each of the 40 attributes and determining the best threshold for each depending on testing output (for example, finding the range of values predicted for each attribute and setting the threshold to the median of that range).
 
 We included a testing function to evaluate the model's performance on a single image. This function shows the image with 
 PyPlot and prints the model's output for each of the 40 facial attributes. An example is included in our code. 
