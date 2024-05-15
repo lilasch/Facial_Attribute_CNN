@@ -3,7 +3,7 @@ Lila Schisgal and Phoebe Jeske
 
 This project aims to create a convolutional neural network which, when given an image of a face, can recognize various attributes such as the accessories, hairstyles, and expressions. It does this using the CelebFaces Attributes DataSet. 
 
-The final_project.ipynb file contains our final model. The milestone_1 and milestone_2.ipynb files are remnants from the previous milestones left to show the evolution of our code.
+The Final_project.ipynb file contains our final model. The milestone_1 and milestone_2.ipynb files are remnants from the previous milestones left to show the evolution of our code.
 
 In order to accurately recreate our work, the user should use the following:
 Tensorflow 2.15.0
